@@ -4,6 +4,10 @@ A modern, responsive, and secure Learning Management System (LMS) monorepo. It f
 
 The platform provides a comprehensive workflow for administrators to manage users, trainers to construct courses and publish lecture videos, and students to enroll, track progress, and watch course materials.
 
+### 🔗 Live Deployments
+* **Frontend Client**: [https://learning-experience-platform-rmwu.vercel.app](https://learning-experience-platform-rmwu.vercel.app)
+* **Backend API**: [https://learning-experience-platform-ten.vercel.app](https://learning-experience-platform-ten.vercel.app)
+
 ---
 
 ## 🚀 Key Features
@@ -112,6 +116,10 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ---
 
 ## 🌐 Production Deployment
+
+The project is actively deployed on **Vercel**:
+* **Frontend Application**: [https://learning-experience-platform-rmwu.vercel.app](https://learning-experience-platform-rmwu.vercel.app)
+* **Backend API**: [https://learning-experience-platform-ten.vercel.app](https://learning-experience-platform-ten.vercel.app)
 
 This project is pre-configured for instant deployment on **Vercel** as a serverless monorepo application. 
 

@@ -19,6 +19,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+// Trust proxy for rate limiting behind reverse proxies (like Vercel)
+app.set("trust proxy", 1);
+
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -56,10 +59,19 @@ const connectDB = async () => {
     if (process.env.NODE_ENV !== "production") {
       process.exit(1);
     }
+    throw error;
   }
 };
 
-connectDB();
+// Middleware to ensure DB connection is established before routing requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ message: "Database connection failed", error: error.message });
+  }
+});
 
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/admin", adminRoutes);

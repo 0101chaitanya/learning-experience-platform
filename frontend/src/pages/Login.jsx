@@ -9,6 +9,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [showDemoCreds, setShowDemoCreds] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -142,6 +143,68 @@ const Login = () => {
                 {isLoading ? <CircularProgress size={24} /> : 'Sign In'}
               </Button>
             </Box>
+
+            <Box sx={{ mt: 2, borderTop: '1px dashed rgba(255, 255, 255, 0.1)', pt: 2 }}>
+              <Button
+                variant="text"
+                size="small"
+                fullWidth
+                onClick={() => setShowDemoCreds(!showDemoCreds)}
+                sx={{ 
+                  color: '#a855f7', 
+                  textTransform: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.85rem',
+                  '&:hover': { backgroundColor: 'rgba(168, 85, 247, 0.08)' }
+                }}
+              >
+                {showDemoCreds ? 'Hide Demo Credentials' : 'Show Demo Credentials'}
+              </Button>
+              
+              {showDemoCreds && (
+                <Box sx={{ mt: 1.5, display: 'flex', flexDirection: 'column', gap: 1.2 }}>
+                  {[
+                    { role: 'Admin', email: '0101chaitanya@gmail.com', pass: 'Pass@123', color: '#6366f1' },
+                    { role: 'Trainer', email: 'user0101@yahoo.com', pass: 'Pass@123', color: '#10b981' },
+                    { role: 'Student', email: 'ololchaitanya@yahoo.com', pass: 'Pass@123', color: '#f59e0b' }
+                  ].map((item) => (
+                    <Box 
+                      key={item.role} 
+                      onClick={() => setFormData({ email: item.email, password: item.pass })}
+                      sx={{ 
+                        p: 1.2, 
+                        borderRadius: 2, 
+                        backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+                        border: '1px solid rgba(255, 255, 255, 0.05)', 
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease-in-out',
+                        '&:hover': { 
+                          backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+                          borderColor: item.color,
+                          transform: 'translateY(-1px)' 
+                        }
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+                        <Typography variant="subtitle2" sx={{ fontWeight: '700', color: item.color, fontSize: '0.8rem' }}>
+                          {item.role}
+                        </Typography>
+                        <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.4)', fontSize: '0.65rem' }}>
+                          Click to autofill
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                        Email: {item.email}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                        Pass: {item.pass}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              )}
+            </Box>
+
             <Typography variant="body2" sx={{ mt: 2, textAlign: 'center' }}>
               Don't have an account? <RouterLink to="/register" style={{ textDecoration: 'none', color: '#6366f1', fontWeight: 'bold' }}>Register here</RouterLink>
             </Typography>
